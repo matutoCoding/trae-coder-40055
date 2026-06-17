@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #f7f8fa;
+  color: #1d2129;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-lg border border-neutral-100 shadow-sm;
+  }
+  
+  .card-header {
+    @apply px-6 py-4 border-b border-neutral-100 font-semibold text-neutral-600;
+  }
+  
+  .card-body {
+    @apply p-6;
+  }
+  
+  .btn-primary {
+    @apply px-4 py-2 bg-primary-500 text-white rounded hover:bg-primary-600 transition-all duration-200 shadow-sm hover:shadow;
+  }
+  
+  .btn-secondary {
+    @apply px-4 py-2 bg-white border border-neutral-200 text-neutral-600 rounded hover:bg-neutral-50 transition-all duration-200;
+  }
+  
+  .btn-success {
+    @apply px-4 py-2 bg-success-500 text-white rounded hover:bg-success-600 transition-all duration-200;
+  }
+  
+  .btn-danger {
+    @apply px-4 py-2 bg-danger-500 text-white rounded hover:bg-danger-600 transition-all duration-200;
+  }
+  
+  .input-field {
+    @apply w-full px-3 py-2 border border-neutral-200 rounded focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+  }
+  
+  .table-row {
+    @apply hover:bg-primary-50 transition-colors duration-150 cursor-pointer;
+  }
+  
+  .table-row-selected {
+    @apply bg-primary-50 border-l-4 border-l-primary-500;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 text-neutral-300 hover:bg-primary-700 hover:text-white transition-all duration-200 cursor-pointer rounded-md mx-2;
+  }
+  
+  .sidebar-item-active {
+    @apply bg-primary-600 text-white shadow-md;
+  }
+  
+  .status-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .status-pending {
+    @apply bg-neutral-100 text-neutral-600;
+  }
+  
+  .status-processing {
+    @apply bg-warning-100 text-warning-600;
+  }
+  
+  .status-completed {
+    @apply bg-primary-100 text-primary-600;
+  }
+  
+  .status-qualified {
+    @apply bg-success-100 text-success-600;
+  }
+  
+  .status-unqualified {
+    @apply bg-danger-100 text-danger-600;
+  }
+  
+  .animate-pulse-dot {
+    animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes pulse-dot {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  .data-table th {
+    @apply px-4 py-3 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider bg-neutral-50;
+  }
+  
+  .data-table td {
+    @apply px-4 py-3 whitespace-nowrap text-sm text-neutral-700;
+  }
+  
+  .data-table tr {
+    @apply border-b border-neutral-100;
+  }
+}
+
+/* Ant Design 自定义样式覆盖 */
+.ant-btn-primary {
+  background-color: #165DFF;
+}
+
+.ant-btn-primary:hover {
+  background-color: #0E42D2 !important;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #F7F8FA !important;
+  font-weight: 600 !important;
+}
+
+.ant-menu-dark {
+  background-color: #1D2129 !important;
+}
+
+.ant-menu-dark .ant-menu-item-selected {
+  background-color: #165DFF !important;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9cdd4;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #86909c;
+}
