@@ -145,6 +145,7 @@ export interface VibrationTest {
 export interface FinishedProduct {
   id: string;
   packageBatch: string;
+  assemblyBatch?: string;
   bearingTypeName: string;
   bearingModel: string;
   quantity: number;

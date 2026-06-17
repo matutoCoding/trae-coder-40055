@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Table } from 'antd';
+import { Card, Table, Button, Popconfirm, message } from 'antd';
 import ReactECharts from 'echarts-for-react';
 import {
   Factory,
@@ -15,6 +15,7 @@ import {
   Wrench,
   Waves,
   LayoutDashboard,
+  RotateCcw,
 } from 'lucide-react';
 import { useProcessStore } from '@/store/useProcessStore';
 import PageHeader from '@/components/PageHeader';
@@ -22,18 +23,18 @@ import StatCard from '@/components/StatCard';
 import StatusTag from '@/components/StatusTag';
 
 export default function Dashboard() {
-  const { dashboardStats, refreshDashboard, initMockData, turningProcesses, heatProcesses, grindingProcesses } = useProcessStore();
+  const { dashboardStats, refreshDashboard, resetAllData, turningProcesses, heatProcesses, grindingProcesses } = useProcessStore();
   const navigate = useNavigate();
-  const hasInitialized = useRef(false);
 
   useEffect(() => {
-    if (!hasInitialized.current) {
-      initMockData();
-      hasInitialized.current = true;
-    }
     const timer = setInterval(refreshDashboard, 30000);
     return () => clearInterval(timer);
-  }, [initMockData, refreshDashboard]);
+  }, [refreshDashboard]);
+
+  const handleReset = () => {
+    resetAllData();
+    message.success('数据已重置为初始状态');
+  };
 
   if (!dashboardStats) return null;
 
@@ -155,6 +156,17 @@ export default function Dashboard() {
               <span className="w-2 h-2 bg-success-500 rounded-full animate-pulse-dot"></span>
               <span>系统运行正常</span>
             </div>
+            <Popconfirm
+              title="确认重置数据？"
+              description="所有生产数据将被重置为初始状态，此操作不可恢复。"
+              onConfirm={handleReset}
+              okText="确认重置"
+              cancelText="取消"
+            >
+              <Button icon={<RotateCcw size={16} />} size="small">
+                重置数据
+              </Button>
+            </Popconfirm>
           </div>
         }
       />
@@ -239,7 +251,7 @@ export default function Dashboard() {
           </div>
         </Card>
 
-        <Card title="最近任务" className="card border-none shadow-sm" bodyStyle={{ padding: 0 }}>
+        <Card title="最近任务" className="card border-none shadow-sm" styles={{ body: { padding: 0 } }}>
           <Table
             columns={recentTasksColumns}
             dataSource={dashboardStats.recentTasks}
